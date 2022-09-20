@@ -120,7 +120,7 @@
 			->where("(s.tanggal between '$date1' and '$date2')")
 			->get()->result_array();
 
-           	$no = 1 ;
+           	$no = 0 ;
             $total = 0;
 			
            	foreach ($stok as $row) : ?>  
@@ -136,6 +136,7 @@
                </tr>
 
 			<?php
+			$no++;
 			$total += $row['jumlah'];
 			endforeach; ?>
 

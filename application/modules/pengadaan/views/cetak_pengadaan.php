@@ -123,13 +123,13 @@
 			->where('pd.pengadaan_id',$id)
 			->get()->result_array();
 
-           	$no = 1 ;
+           	$no = 0 ;
 
             $total = 0;
 			
            	foreach ($pengadaan as $row) : ?>  
                <tr>
-                   <td align="center"><?php echo $no;?></td>
+                   <td align="center"><?php echo $no+1;?></td>
                    <td align="left"><?= $row["produk"] ?></td>
 				   <td align="center"><?= number_format($row['qty'],0,',','.'); ?></td>
 	               <td align="center"><?= $row["satuan"]; ?></td>
@@ -139,6 +139,7 @@
                </tr>
 
 			<?php
+			$no++;
 			$total += $row['jumlah'];
 			endforeach; ?>
 
