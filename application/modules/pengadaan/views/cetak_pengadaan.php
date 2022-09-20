@@ -66,10 +66,11 @@
 					->get()->row_array();
 
 					$tanggal = $judul['tanggal_permintaan'];
+					$date = date('Y-m-d',strtotime($tanggal));?>
 					?>
 					<div style="display: block;font-weight: bold;font-size: 12px; text-transform: uppercase;"><?= $judul["judul"] ?></div>
 					<?php
-					function tgl_indo($tanggal){
+					function tgl_indo($date){
 						$bulan = array (
 							1 =>   'Januari',
 							'Februari',
@@ -84,7 +85,7 @@
 							'November',
 							'Desember'
 						);
-						$pecahkan = explode('-', $tanggal);
+						$pecahkan = explode('-', $date);
 						
 						// variabel pecahkan 0 = tanggal
 						// variabel pecahkan 1 = bulan
@@ -95,7 +96,7 @@
 					}
 					?>
 
-					<div style="display: block;font-weight: bold;font-size: 12px; text-transform: uppercase;">(<?= tgl_indo(date('Y-m-d')); ?>)</div>
+					<div style="display: block;font-weight: bold;font-size: 12px; text-transform: uppercase;">(<?= tgl_indo(date($date)); ?>)</div>
 				</td>
 			</tr>
 		</table>
