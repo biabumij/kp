@@ -105,8 +105,8 @@
 		<table class="minimalistBlack" cellpadding="5" width="98%">
 			<tr class="table-active">
 				<th align="center" width="5%">NO.</th>
-				<th align="center" width="15%">TANGGAL</th>
-				<th align="center" width="15%">PRODUK</th>
+				<th align="center" width="10%">TANGGAL</th>
+				<th align="center" width="20%">PRODUK</th>
 				<th align="center" width="10%">STOK</th>
 				<th align="center" width="10%">SATUAN</th>
 				<th align="center" width="15%">HARGA SATUAN</th>
@@ -125,7 +125,7 @@
 			
            	foreach ($stok as $row) : ?>  
                <tr>
-                   <td align="center"><?php echo $no;?></td>
+                   <td align="center"><?php echo $no+1;?></td>
                    <td align="left"><?= $row["tanggal"] ?></td>
 				   <td align="left"><?= $row["produk"] ?></td>
 				   <td align="center"><?= number_format($row['stok'],0,',','.'); ?></td>
