@@ -148,7 +148,7 @@
             </tr>
            	
 		</table>
-		<table width="98%" border="0" cellpadding="20">
+		<table width="98%" border="0" cellpadding="10">
 			<tr >
 				<td width="5%"></td>
 				<td width="90%">
