@@ -126,7 +126,7 @@
            	foreach ($stok as $row) : ?>  
                <tr>
                    <td align="center"><?php echo $no+1;?></td>
-                   <td align="left"><?= $row["tanggal"] ?></td>
+                   <td align="left"><?= $row["tanggal"] = date('d-m-Y',strtotime($row["tanggal"])); ?></td>
 				   <td align="left"><?= $row["produk"] ?></td>
 				   <td align="center"><?= number_format($row['stok'],0,',','.'); ?></td>
 	               <td align="center"><?= $row["satuan"]; ?></td>
