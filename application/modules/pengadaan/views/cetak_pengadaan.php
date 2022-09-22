@@ -151,7 +151,7 @@
             </tr>
            	
 		</table>
-		<table width="98%" border="0" cellpadding="30">
+		<table width="98%" border="0" cellpadding="20">
 			<tr >
 				<td width="5%"></td>
 				<td width="90%">
