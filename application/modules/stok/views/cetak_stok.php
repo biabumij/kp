@@ -95,7 +95,7 @@
 		<table width="100%" border="0" cellpadding="3">
 			<tr>
 				<td align="center">
-					<div style="display: block;font-weight: bold;font-size: 12px;">STOK</div>
+					<div style="display: block;font-weight: bold;font-size: 12px;">STOCK OPNAME</div>
 					<div style="display: block;font-weight: bold;font-size: 12px; text-transform: uppercase;">PERIODE <?php echo str_replace($search, $replace, $subject);?></div>
 				</td>
 			</tr>
