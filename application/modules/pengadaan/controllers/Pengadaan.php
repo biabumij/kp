@@ -107,6 +107,7 @@ class Pengadaan extends Secure_Controller {
 				$produk = $this->input->post('produk_' . $i);
 				$qty = $this->input->post('qty_' . $i);
 				$satuan = $this->input->post('satuan_' . $i);
+				$keterangan = $this->input->post('keterangan_' . $i);
 
 
 				$harga_satuan = $this->input->post('harga_satuan_' . $i);
@@ -125,7 +126,8 @@ class Pengadaan extends Secure_Controller {
                         'qty' => $qty,
                         'satuan' => $satuan,
                         'harga_satuan' => $harga_satuan,
-                        'jumlah' => $jumlah_pro
+                        'jumlah' => $jumlah_pro,
+						'keterangan' => $keterangan
                     );
 
                     $this->db->insert('pengadaan_detail', $arr_detail);
