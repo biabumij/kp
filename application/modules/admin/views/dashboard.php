@@ -34,7 +34,35 @@
                 </div>
             </div>
 
-            <div id="wwo-weather-widget-5"></div><script type='text/javascript' src='https://www.worldweatheronline.com/widget/v5/weather-widget.ashx?loc=3026315&wid=5&tu=1&div=wwo-weather-widget-5' async></script><noscript><a href="https://www.worldweatheronline.com/jakarta-weather/jakarta-raya/id.aspx" alt="Hour by hour Jakarta, Jakarta Raya weather">Jakarta, Jakarta Raya weather forecast hourly</a></noscript>
+            <!-- Stok -->
+            <div role="tabpanel" class="tab-pane" id="stok">
+                        <div class="col-sm-15">
+                        <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Stok</h3>
+                                </div>
+                                <div style="margin: 20px">
+                                    <div class="row"> 
+                                        <div class="col-sm-4">
+                                            <input type="text" id="filter_date_stok" name="filter_date" class="form-control dtpicker"  autocomplete="off" placeholder="Filter By Date">
+                                        </div>   
+                                    </div>
+                                    <br />
+                                    <div id="wait" style=" text-align: center; align-content: center; display: none;">	
+                                        <div>Please Wait</div>
+                                        <div class="fa-3x">
+                                            <i class="fa fa-spinner fa-spin"></i>
+                                        </div>
+                                    </div>				
+                                    <div class="table-responsive" id="table-stok">													
+                                    
+    
+                                    </div>
+                                </div>
+                        </div>
+                        
+                        </div>
+                    </div>
             
         </div>
        
@@ -77,7 +105,25 @@
             'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
         }
     });
+    
+    function TableStok()
+    {
+        $('#wait').fadeIn('fast');   
+        $.ajax({
+            type    : "POST",
+            url     : "<?php echo site_url('stok/dashboard_stok'); ?>/"+Math.random(),
+            dataType : 'html',
+            data: {
+                filter_date : $('#filter_date_stok').val(),
+            },
+            success : function(result){
+                $('#table-stok').html(result);
+                $('#wait').fadeOut('fast');
+            }
+        });
+    }
 
+    TableStok();
 </script>
 
 </body>

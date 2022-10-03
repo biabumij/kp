@@ -178,5 +178,100 @@ class Stok extends Secure_Controller {
 		echo json_encode($output);
 	}
 
+	public function dashboard_stok($arr_date)
+	{
+		$data = array();
+		
+		$arr_date = $this->input->post('filter_date');
+		$arr_filter_date = explode(' - ', $arr_date);
+
+		$last_production = $this->db->select('tanggal')->group_by('tanggal')->order_by('tanggal','desc')->limit(1)->get_where('stok',array('status'=>'PUBLISH'))->row_array();
+		$last_production_2 = $this->db->select('tanggal')->group_by('tanggal')->order_by('tanggal','asc')->limit(1)->get_where('stok',array('status'=>'PUBLISH'))->row_array();
+		
+		$date1 = date('Y-m-d', strtotime('+1 days', strtotime($last_production_2['tanggal'])));
+		$date2 =  date('Y-m-d', strtotime($last_production['tanggal']));
+		$date1_filter = date('d F Y', strtotime($date1));
+		$date2_filter = date('d F Y', strtotime($date2));
+		
+
+		if(count($arr_filter_date) == 2){
+			$date1 	= date('Y-m-d',strtotime($arr_filter_date[0]));
+			$date2 	= date('Y-m-d',strtotime($arr_filter_date[1]));
+			$filter_date = date('d F Y',strtotime($arr_filter_date[0])).' - '.date('d F Y',strtotime($arr_filter_date[1]));
+			$date1_filter = date('d F Y',strtotime($arr_filter_date[0]));
+			$date2_filter = date('d F Y',strtotime($arr_filter_date[1]));
+		}
+		
+		?>
+		
+		<table class="table table-bordered" width="100%">
+			<style type="text/css">
+				table tr.table-active{
+				background-color: #ffb732;
+				color: black;
+			}
+			blink {
+			-webkit-animation: 2s linear infinite kedip; /* for Safari 4.0 - 8.0 */
+			animation: 2s linear infinite kedip;
+			}
+			/* for Safari 4.0 - 8.0 */
+			@-webkit-keyframes kedip { 
+			0% {
+				visibility: hidden;
+			}
+			50% {
+				visibility: hidden;
+			}
+			100% {
+				visibility: visible;
+			}
+			}
+			@keyframes kedip {
+			0% {
+				visibility: hidden;
+			}
+			50% {
+				visibility: hidden;
+			}
+			100% {
+				visibility: visible;
+			}
+			}
+			</style>
+
+			<?php
+
+			$stok = $this->db->select('*')
+			->from('stok')
+			->where("tanggal between '$date1' and '$date2'")
+			->where('status','PUBLISH')
+			->where("stok = 0")
+			->group_by("id")
+			->get()->result_array();
+
+	        ?>
+
+			<tr class="table-active">
+				<th class="text-center" colspan="5" style="text-transform:uppercase">
+				</th>
+			</tr>
+			<tr>
+				<th width="5%" class="text-center" style='background-color:rgb(0,206,209); color:black'>NO.</th>
+				<th class="text-center" style='background-color:rgb(0,206,209); color:black'>TANGGAL OPNAME TERAKHIR</th>
+				<th class="text-center" style='background-color:rgb(0,206,209); color:black'>PRODUK</th>
+				<th class="text-center" style='background-color:rgb(0,206,209); color:black'>STOK</th>
+	        </tr>
+			<?php foreach ($stok as $key => $x): ?>
+			<tr>
+				<th width="5%" class="text-center" style="vertical-align:middle"><?php echo $key + 1;?></th>			
+				<th width="25%" class="text-center"><?= $x['tanggal'] ?></th>
+				<th width="40%" class="text-left" style='color:red;'><blink><?= $x['produk'] ?></blink></th>
+				<th width="30%" class="text-center" style='color:red;'><blink><?= $x['stok'] ?></blink></th>
+	        </tr>
+			<?php endforeach; ?>
+	    </table>
+		<?php
+	}
+
 }
 ?>
