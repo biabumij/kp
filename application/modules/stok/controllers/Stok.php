@@ -207,8 +207,8 @@ class Stok extends Secure_Controller {
 		<table class="table table-bordered" width="100%">
 			<style type="text/css">
 				table tr.table-active{
-				background-color: #ffb732;
-				color: black;
+				background-color: red;
+				color: white;
 			}
 			blink {
 			-webkit-animation: 2s linear infinite kedip; /* for Safari 4.0 - 8.0 */
@@ -252,8 +252,7 @@ class Stok extends Secure_Controller {
 	        ?>
 
 			<tr class="table-active">
-				<th class="text-center" colspan="5" style="text-transform:uppercase">
-				</th>
+				<th class="text-center" colspan="5" style="text-transform:uppercase"><blink>PRODUK TIDAK TERSEDIA !!</blink></th>
 			</tr>
 			<tr>
 				<th width="5%" class="text-center" style='background-color:rgb(0,206,209); color:black'>NO.</th>
@@ -263,10 +262,10 @@ class Stok extends Secure_Controller {
 	        </tr>
 			<?php foreach ($stok as $key => $x): ?>
 			<tr>
-				<th width="5%" class="text-center" style="vertical-align:middle"><?php echo $key + 1;?></th>			
-				<th width="25%" class="text-center"><?= $x['tanggal'] ?></th>
-				<th width="40%" class="text-left" style='color:red;'><blink><?= $x['produk'] ?></blink></th>
-				<th width="30%" class="text-center" style='color:red;'><blink><?= $x['stok'] ?></blink></th>
+				<th width="5%" class="text-center" style='color:red;'><?php echo $key + 1;?></th>			
+				<th width="25%" class="text-center" style='color:red;'><?= $x['tanggal'] ?></th>
+				<th width="40%" class="text-left" style='color:red;'><?= $x['produk'] ?></th>
+				<th width="30%" class="text-center" style='color:red;'><?= $x['stok'] ?></th>
 	        </tr>
 			<?php endforeach; ?>
 	    </table>
