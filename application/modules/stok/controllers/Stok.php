@@ -252,7 +252,7 @@ class Stok extends Secure_Controller {
 	        ?>
 
 			<tr class="table-active">
-				<th class="text-center" colspan="5" style="text-transform:uppercase"><blink>PRODUK TIDAK TERSEDIA !!</blink></th>
+				<th class="text-center" colspan="5" style="text-transform:uppercase"><blink>STOK TIDAK TERSEDIA !!</blink></th>
 			</tr>
 			<tr>
 				<th width="5%" class="text-center" style='background-color:rgb(0,206,209); color:black'>NO.</th>
