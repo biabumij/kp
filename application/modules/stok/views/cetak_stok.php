@@ -184,7 +184,7 @@
 						<tr>
 							<td align="center" >
 								<b><u>Erika Sinaga</u><br />
-								Dir. Keuangan & SDM</b>
+								M. Keuangan & SDM</b>
 							</td>
 							<td align="center" >
 								<b><u>Debi Khania</u><br />
