@@ -121,6 +121,7 @@
 			->from('pengadaan p ')
 			->join('pengadaan_detail pd','p.id = pd.pengadaan_id','left')
 			->where('pd.pengadaan_id',$id)
+			->order_by('pd.produk','asc')
 			->get()->result_array();
 
            	$no = 0 ;
