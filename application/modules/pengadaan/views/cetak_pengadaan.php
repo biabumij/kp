@@ -66,7 +66,7 @@
 					->get()->row_array();
 
 					$tanggal = $judul['tanggal_permintaan'];
-					$date = date('Y-m-d',strtotime($tanggal));?>
+					$date = date('Y-m-d',strtotime($tanggal));
 					?>
 					<div style="display: block;font-weight: bold;font-size: 12px; text-transform: uppercase;"><?= $judul["judul"] ?></div>
 					<?php
