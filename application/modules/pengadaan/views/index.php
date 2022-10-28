@@ -65,7 +65,8 @@
                                                     <tr>
                                                         <th width="5%" class="text-center">No.</th>
                                                         <th width="45%" class="text-center">Judul</th>
-														<th width="40%" class="text-center">Tanggal Permintaan</th>
+														<th width="30%" class="text-center">Tanggal Permintaan</th>
+                                                        <th width="10%" class="text-center">Edit</th>
                                                         <th width="10%" class="text-center">Hapus</th>
                                                     </tr>
                                                 </thead>
@@ -143,6 +144,9 @@
                     "data": "tanggal_permintaan"
                 },
                 {
+                    "data": "edit"
+                },
+                {
                     "data": "hapus"
                 }
             ],
@@ -176,6 +180,22 @@
                         } else if (result.err) {
                             bootbox.alert(result.err);
                         }
+                    }
+                });
+            }
+            });
+        }
+
+        function EditPengadaan(id) {
+        bootbox.confirm("Anda yakin akan mengedit data ini ?", function(result) {
+            // console.log('This was logged in the callback: ' + result); 
+            if (result) {
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo site_url('pengadaan/edit_pengadaan'); ?>",
+                    dataType: 'json',
+                    data: {
+                        id: id
                     }
                 });
             }

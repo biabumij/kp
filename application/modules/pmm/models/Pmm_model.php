@@ -4102,5 +4102,57 @@ class Pmm_model extends CI_Model {
         return $data;   
     }
 
+    function TableMainPengadaan($id)
+    {
+        $data = array();
+        $this->db->select('pd.*');
+        $this->db->where('pd.id',$id);
+        $this->db->order_by('pd.id','asc');
+        $query = $this->db->get('pengadaan pd');
+	
+        if($query->num_rows() > 0){
+            foreach ($query->result_array() as $key => $row) {
+                $row['no'] = $key+1;
+                $row['judul'] = $row['judul'];
+                $row['tanggal_permintaan']= date('d F Y',strtotime($row['tanggal_permintaan']));
+				$row['total']= number_format($row['total'],0,',','.');
+                $row['actions'] = '<a href="javascript:void(0);" onclick="OpenFormMain('.$row['id'].')" class="btn btn-success">Update Pengadaan </a>';
+                
+                $data[] = $row;
+            }
+
+        }
+        
+        return $data;   
+    }
+
+    function TableDetailPengadaan($id)
+    {
+        $data = array();
+        $this->db->select('pdt.*');
+        $this->db->join('produk p','pdt.produk = p.id','left');
+        $this->db->where('pdt.pengadaan_id',$id);
+        $this->db->order_by('p.nama_produk','asc');
+        $query = $this->db->get('pengadaan_detail pdt');
+	
+        if($query->num_rows() > 0){
+            foreach ($query->result_array() as $key => $row) {
+                $row['no'] = $key+1;
+                $row['produk'] = $this->crud_global->GetField('produk',array('id'=>$row['produk']),'nama_produk');
+				$row['qty']= number_format($row['qty'],0,',','.');
+                $row['satuan'] = $this->crud_global->GetField('satuan',array('id'=>$row['satuan']),'nama_satuan');
+                $row['harga_satuan']= number_format($row['harga_satuan'],0,',','.');
+                $row['jumlah']= number_format($row['jumlah'],0,',','.');
+                $row['keterangan']= $row['keterangan'];
+                $row['actions'] = '<a href="javascript:void(0);" onclick="DeleteData('.$row['id'].')" class="btn btn-danger"><i class="fa fa-close"></i> </a> <a href="javascript:void(0);" onclick="OpenForm('.$row['id'].')" class="btn btn-primary"><i class="fa fa-edit"></i> </a>';
+                
+                $data[] = $row;
+            }
+
+        }
+        
+        return $data;   
+    }
+
 }
 ?>

@@ -171,6 +171,7 @@ class Pengadaan extends Secure_Controller {
                 $row['no'] = $key+1;
 				$row['judul'] = "<a href=" . base_url('pengadaan/cetak_pengadaan/' . $row["id"]) .' target="_blank">'. $row["judul"] . "</a>";
 				$row['tanggal_permintaan'] = date('d F Y', strtotime($row['tanggal_permintaan']));
+				$row['edit'] = "<a href=" . base_url('pengadaan/edit_pengadaan/'.$row['id']) .' target="_blank">'. '<button class="btn btn-primary"><i class="fa fa-edit"></i></button>' . "</a>";
 				$row['hapus'] = '<a href="javascript:void(0);" onclick="HapusPengadaan('.$row['id'].')" class="btn btn-danger"><i class="fa fa-close"></i> </a>';
 				
                 $data[] = $row;
@@ -212,6 +213,208 @@ class Pengadaan extends Secure_Controller {
 			}
 		}
 		echo json_encode($output);
+	}
+
+	public function edit_pengadaan($id)
+    {
+    	$where = array('id' => $id);
+
+        $data['produk'] = $this->db->order_by('nama_produk', 'asc')->select('*')->get_where('produk', array('status' => 'PUBLISH'))->result_array();
+		$data['satuan'] = $this->db->order_by('nama_satuan', 'asc')->select('*')->get_where('satuan', array('status' => 'PUBLISH'))->result_array();
+
+        $get_data = $this->db->select('pd.*, pdt.*, pd.id as id')
+        ->from('pengadaan pd')
+        ->join('pengadaan_detail pdt','pd.id = pdt.pengadaan_id','left')
+        ->where('pd.id',$id)
+        ->get()->row_array();
+        
+    	$data['data'] = $get_data;
+        
+		$this->load->view('pengadaan/edit_form',$data);
+    }
+
+	public function main_table()
+	{	
+		$data = $this->pmm_model->TableMainPengadaan($this->input->post('id'));
+		echo json_encode(array('data'=>$data));
+	}
+
+	public function table_detail()
+	{	
+		$data = $this->pmm_model->TableDetailPengadaan($this->input->post('id'));
+		echo json_encode(array('data'=>$data));
+	}
+
+	public function product_process()
+	{
+		$output['output'] = false;
+
+		$pengadaan_id = $this->input->post('pengadaan_id');
+		$produk = $this->input->post('produk');
+		$satuan = $this->input->post('satuan');
+		$qty = str_replace(',', '.', $this->input->post('qty'));
+		$harga_satuan = str_replace(',', '.', $this->input->post('harga_satuan'));
+		$jumlah = str_replace(',', '.', $this->input->post('jumlah'));
+		$keterangan = $this->input->post('keterangan');
+
+		$check = $this->db->get_where('pengadaan_detail',array('pengadaan_id'=>$pengadaan_id,'produk'=>$produk))->num_rows();
+
+		if(empty($id) && $check > 0){
+			$output['output'] = false;
+			$output['err'] = 'Produk Sudah Ditambahkan !!!';
+		}else {
+            //$transaction_id = $this->pmm_model->GetNoEditBiaya();
+
+
+			$data_p = array(
+				'pengadaan_id' => $pengadaan_id,
+				'produk' => $produk,
+				'satuan' => $satuan,
+				'qty' => $qty,
+				'harga_satuan' => $harga_satuan,
+				'jumlah' => $jumlah,
+				'keterangan' => $keterangan,
+			);
+			
+			if(!empty($pengadaan_id)){
+				//$data_p['updated_by'] = $this->session->userdata('admin_id');
+				$this->db->insert('pengadaan_detail',$data_p,array('id'=>$pengadaan_id));
+			}else {	
+				//$data_p['created_on'] = date('Y-m-d H:i:s');
+				//$data_p['created_by'] = $this->session->userdata('admin_id');
+				$this->db->insert('pengadaan_detail',$data_p,array('id'=>$pengadaan_id));	
+			}
+
+			if ($this->db->trans_status() === FALSE) {
+				# Something went wrong.
+				$this->db->trans_rollback();
+				$output['output'] = false;
+			} 
+			else {
+				# Everything is Perfect. 
+				# Committing data to the database.
+				$this->db->trans_commit();
+				$output['output'] = true;
+			}
+		}
+	
+		
+		echo json_encode($output);	
+	}
+
+	public function delete_detail()
+	{
+		$output['output'] = false;
+		$id = $this->input->post('id');
+		if(!empty($id)){
+			
+			if($this->db->delete('pengadaan_detail',array('id'=>$id))){
+				$output['output'] = true;
+			}
+		}
+		echo json_encode($output);
+	}
+
+	public function get_pengadaan()
+	{
+		$output['output'] = false;
+		$id = $this->input->post('id');
+		if(!empty($id)){
+			$data = $this->db->select('*')->get_where('pengadaan_detail',array('id'=>$id))->row_array();
+
+			$output['output'] = $data;
+		}
+		echo json_encode($output);
+	}
+
+	public function form_pengadaan()
+	{
+		$output['output'] = false;
+
+		$id_detail = $this->input->post('id_detail');
+		$pengadaan_id = $this->input->post('pengadaan_id');
+		$produk = $this->input->post('produk');
+		$satuan = $this->input->post('satuan');
+		$qty = str_replace(',', '.', $this->input->post('qty'));
+		$harga_satuan = str_replace(',', '.', $this->input->post('harga_satuan'));
+		$jumlah = str_replace(',', '.', $this->input->post('jumlah'));
+		$keterangan = $this->input->post('keterangan');
+
+		$data = array(
+            'pengadaan_id' => $pengadaan_id,
+			'produk' => $produk,
+			'satuan' => $satuan,
+			'qty' => $qty,
+			'harga_satuan' => $harga_satuan,
+			'jumlah' => $jumlah,
+			'keterangan' => $keterangan
+		);
+
+		if(!empty($id)){
+			//$data['created_by'] = $this->session->userdata('admin_id');
+            //$data['created_on'] = date('Y-m-d H:i:s');
+			if($this->db->update('pengadaan_detail',$data,array('id'=>$id_detail))){
+				$output['output'] = true;
+			}
+		}else{
+            //$data['updated_by'] = $this->session->userdata('admin_id');
+			if($this->db->update('pengadaan_detail',$data,array('id'=>$id_detail))){
+				$output['output'] = true;
+			}
+		}
+		
+		echo json_encode($output);	
+	}
+
+	public function get_pengadaan_main()
+	{
+		$output['output'] = false;
+		$id = $this->input->post('id');
+		if(!empty($id)){
+            $data = $this->db->select('pd.*, sum(pdt.jumlah) as total')
+            ->from('pengadaan pd')
+			->join('pengadaan_detail pdt','pd.id = pdt.pengadaan_id','left')
+            ->where('pd.id',$id)
+            ->get()->row_array();
+
+            $data['tanggal_permintaan'] = date('d-m-Y',strtotime($data['tanggal_permintaan']));
+			$output['output'] = $data;
+            
+		}
+		echo json_encode($output);
+	}
+
+	public function form_pengadaan_main()
+	{
+		$output['output'] = false;
+
+		$pengadaan_id = $this->input->post('pengadaan_id');
+		$judul = $this->input->post('judul');
+		$tanggal_permintaan = date('Y-m-d',strtotime($this->input->post('tanggal_permintaan')));
+		$total = str_replace(',', '.', $this->input->post('total'));
+        $total = $this->input->post('total');
+
+		$data = array(
+            'id' => $pengadaan_id,
+			'judul' => $judul,
+			'tanggal_permintaan' => $tanggal_permintaan,
+            'total' => $total
+		);
+
+		if(!empty($id)){
+			//$data['created_by'] = $this->session->userdata('admin_id');
+            //$data['created_on'] = date('Y-m-d H:i:s');
+			if($this->db->update('pengadaan',$data,array('id'=>$pengadaan_id))){
+				$output['output'] = true;
+			}
+		}else{
+            //$data['updated_by'] = $this->session->userdata('admin_id');
+			if($this->db->update('pengadaan',$data,array('id'=>$pengadaan_id))){
+				$output['output'] = true;
+			}
+		}
+		
+		echo json_encode($output);	
 	}
 
 }
