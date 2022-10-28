@@ -188,6 +188,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/back/theme/vendor/daterangepicker/daterangepicker.css">
     
     <script type="text/javascript">
+    $('input.numberformat').number( true, 0,',','.' );
 	$('#filter_date_stok').daterangepicker({
         autoUpdateInput: false,
         locale: {
