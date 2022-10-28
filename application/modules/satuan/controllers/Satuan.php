@@ -66,7 +66,8 @@ class Satuan extends Secure_Controller {
 			foreach ($query->result_array() as $key => $row) {
                 $row['no'] = $key+1;
 				$row['nama_satuan'] = $row['nama_satuan'];
-				$row['hapus'] = '<a href="javascript:void(0);" onclick="HapusSatuan('.$row['id'].')" class="btn btn-danger"><i class="fa fa-close"></i> </a>';
+				//$row['hapus'] = '<a href="javascript:void(0);" onclick="HapusSatuan('.$row['id'].')" class="btn btn-danger"><i class="fa fa-close"></i> </a>';
+				$row['hapus'] = '-';
 				
                 $data[] = $row;
             }

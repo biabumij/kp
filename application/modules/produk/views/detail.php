@@ -63,7 +63,7 @@
                                     <?php
                                     if($this->session->userdata('admin_group_id') == 1 || $this->session->userdata('admin_group_id') == 2){
                                         ?>
-                                        <a class="btn btn-danger" onclick="DeleteData('<?= site_url('produk/hapus/'.$row['id']);?>')"><i class="fa fa-close"></i> Hapus</a>
+                                        <!--<a class="btn btn-danger" onclick="DeleteData('<?= site_url('produk/hapus/'.$row['id']);?>')"><i class="fa fa-close"></i> Hapus</a>-->
                                         <a  href="<?= base_url('produk/buat_baru/'.$row['id']) ?>" class="btn btn-primary"><i class="fa fa-edit"></i> Ubah</a>
                                         <?php
                                     }
