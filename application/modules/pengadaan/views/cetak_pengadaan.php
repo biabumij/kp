@@ -117,7 +117,7 @@
 			</tr>
 
 			<?php
-			$pengadaan = $this->db->select('p.judul, p.tanggal_permintaan, pd.*')
+			$pengadaan = $this->db->select('p.judul, p.tanggal_permintaan, pd.*, p.nama_produk')
 			->from('pengadaan p')
 			->join('pengadaan_detail pd','p.id = pd.pengadaan_id','left')
 			->join('produk p','pd.produk = p.id','left')
