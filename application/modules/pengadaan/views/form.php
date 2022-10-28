@@ -81,7 +81,7 @@
                                                     if(!empty($produk)){
                                                         foreach ($produk as $row) {
                                                             ?>
-                                                            <option value="<?php echo $row['nama_produk'];?>"><?php echo $row['nama_produk'];?></option>
+                                                            <option value="<?php echo $row['id'];?>"><?php echo $row['nama_produk'];?></option>
                                                             <?php
                                                         }
                                                     }
@@ -98,7 +98,7 @@
                                                     if(!empty($satuan)){
                                                         foreach ($satuan as $sat) {
                                                             ?>
-                                                            <option value="<?php echo $sat['nama_satuan'];?>"><?php echo $sat['nama_satuan'];?></option>
+                                                            <option value="<?php echo $sat['id'];?>"><?php echo $sat['nama_satuan'];?></option>
                                                             <?php
                                                         }
                                                     }

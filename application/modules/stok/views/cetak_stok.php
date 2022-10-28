@@ -116,8 +116,10 @@
 
 			<?php
 			$stok = $this->db->select('s.*')
-			->from('stok s ')
+			->from('stok s')
+			->join('produk p','s.produk = p.id','left')
 			->where("(s.tanggal between '$date1' and '$date2')")
+			->order_by('p.nama_produk','asc')
 			->get()->result_array();
 
            	$no = 0 ;
@@ -127,9 +129,9 @@
                <tr>
                    <td align="center"><?php echo $no+1;?></td>
                    <td align="left"><?= $row["tanggal"] = date('d-m-Y',strtotime($row["tanggal"])); ?></td>
-				   <td align="left"><?= $row["produk"] ?></td>
+				   <td align="left"><?= $this->crud_global->GetField('produk',array('id'=>$row['produk']),'nama_produk');?></td>
 				   <td align="center"><?= number_format($row['stok'],0,',','.'); ?></td>
-	               <td align="center"><?= $row["satuan"]; ?></td>
+	               <td align="center"><?= $this->crud_global->GetField('satuan',array('id'=>$row['satuan']),'nama_satuan');?></td>
 	               <td align="right"><?= number_format($row['harga_satuan'],0,',','.'); ?></td>
 	               <td align="right"><?= number_format($row['jumlah'],0,',','.'); ?></td>
 				   <td align="center"><?= $row["keterangan"]; ?></td>

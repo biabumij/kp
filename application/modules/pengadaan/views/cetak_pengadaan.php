@@ -131,9 +131,9 @@
            	foreach ($pengadaan as $row) : ?>  
                <tr>
                    <td align="center"><?php echo $no+1;?></td>
-                   <td align="left"><?= $row["produk"] ?></td>
+                   <td align="left"><?= $this->crud_global->GetField('produk',array('id'=>$row['produk']),'nama_produk');?></td>
 				   <td align="center"><?= number_format($row['qty'],0,',','.'); ?></td>
-	               <td align="center"><?= $row["satuan"]; ?></td>
+	               <td align="center"><?= $this->crud_global->GetField('satuan',array('id'=>$row['satuan']),'nama_satuan');?></td>
 	               <td align="right"><?= number_format($row['harga_satuan'],0,',','.'); ?></td>
 	               <td align="right"><?= number_format($row['jumlah'],0,',','.'); ?></td>
 				   <td align="center"><?= $row["keterangan"]; ?></td>

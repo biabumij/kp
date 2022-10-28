@@ -97,9 +97,9 @@ class Stok extends Secure_Controller {
 			foreach ($query->result_array() as $key => $row) {
                 $row['no'] = $key+1;
 				$row['tanggal'] = date('d F Y', strtotime($row['tanggal']));
-				$row['produk'] = $row['produk'];
+				$row['produk'] = $this->crud_global->GetField('produk',array('id'=>$row['produk']),'nama_produk');
 				$row['stok'] = number_format($row['stok'],0,',','.');
-				$row['satuan'] = $row['satuan'];
+				$row['satuan'] = $this->crud_global->GetField('satuan',array('id'=>$row['satuan']),'nama_satuan');
 				$row['harga_satuan'] = number_format($row['harga_satuan'],0,',','.');
 				$row['jumlah'] = number_format($row['jumlah'],0,',','.');
 				$row['keterangan'] = $row['keterangan'];
