@@ -89,8 +89,9 @@ class Stok extends Secure_Controller {
 			$this->db->where('s.tanggal <=',date('Y-m-d',strtotime($arr_date[1])));
 		}
         $this->db->select('s.*');
+		$this->db->join('produk p','s.produk = p.id','left');
 		$this->db->order_by('s.tanggal','desc');
-		$this->db->order_by('s.id','desc');		
+		$this->db->order_by('p.nama_produk','asc')	
 		$query = $this->db->get('stok s');
 		
        if($query->num_rows() > 0){
