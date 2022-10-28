@@ -48,14 +48,6 @@
                                                 <?= $row['kategori_produk'];?>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <th>
-                                                Satuan
-                                            </th>        
-                                            <td>
-                                                <?= $row['satuan'];?>
-                                            </td>
-                                        </tr>
                                     </table>
                                 </div>
                                 <div class="col-sm-12 text-right">

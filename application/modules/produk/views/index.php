@@ -48,10 +48,9 @@
                                         <table class="table table-striped table-hover table-center" id="table-pantry" style="width:100%;">
                                             <thead>
                                                 <tr>
-                                                    <th>No.</th>
+                                                    <th width="5%">No.</th>
                                                     <th class="text-center">Nama Produk</th>
                                                     <th class="text-center">Kategori Produk</th>
-                                                    <th class="text-center">Satuan</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -66,10 +65,9 @@
                                         <table class="table table-striped table-hover table-center" id="table-peralatan-kantor" style="width:100%;">
                                             <thead>
                                                 <tr>
-                                                    <th>No.</th>
+                                                    <th width="5%">No.</th>
                                                     <th class="text-center">Nama Produk</th>
                                                     <th class="text-center">Kategori Produk</th>
-                                                    <th class="text-center">Satuan</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -116,14 +114,13 @@
             columns: [
                 { "data": "no" },
                 { "data": "nama_produk" },
-                { "data": "kategori_produk" },
-                { "data": "satuan" }
+                { "data": "kategori_produk" }
             ],
             responsive: true,
             pageLength : 25,
             "columnDefs": [
                 {
-                    "targets": [0,2,3],
+                    "targets": [0,2],
                     "className": 'text-center',
                 }
             ],
@@ -141,14 +138,13 @@
             columns: [
                 { "data": "no" },
                 { "data": "nama_produk" },
-                { "data": "kategori_produk" },
-                { "data": "satuan" }
+                { "data": "kategori_produk" }
             ],
             responsive: true,
             pageLength : 25,
             "columnDefs": [
                 {
-                    "targets": [0,2,3],
+                    "targets": [0,2],
                     "className": 'text-center',
                 }
             ],

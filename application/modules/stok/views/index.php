@@ -75,6 +75,7 @@
                                                         <th width="10%" class="text-center">Harga Satuan</th>
                                                         <th width="10%" class="text-center">Jumlah</th>
                                                         <th width="10%" class="text-center">Keterangan</th>
+                                                        <th width="10%" class="text-center">Edit</th>
                                                         <th width="10%" class="text-center">Hapus</th>
                                                     </tr>
                                                 </thead>
@@ -86,9 +87,85 @@
                                                 </tfoot>
                                             </table>
                                         </div>
+
+
+                                        <!-- FORM EDIT STOK -->
+                                        <div class="modal fade bd-example-modal-lg" id="modalForm" tabindex="-1" role="dialog">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <span class="modal-title">Stock Opname</span>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form class="form-horizontal" style="padding: 0 10px 0 20px;">
+                                                            <input type="hidden" name="id" id="id">
+                                                            <div class="form-group">
+                                                                <label>Tanggal Stock Opname</label>
+                                                                <input type="text" id="tanggal" name="tanggal" class="form-control dtpicker" value="<?php echo date('d-m-Y'); ?>" required="">
+                                                            </div>
+                                                            <?php
+                                                            $produk = $this->db->order_by('nama_produk', 'asc')->select('*')->get_where('produk', array('status' => 'PUBLISH'))->result_array();
+                                                            $satuan = $this->db->order_by('nama_satuan', 'asc')->select('*')->get_where('satuan', array('status' => 'PUBLISH'))->result_array();
+                                                            ?>
+                                                            <div class="form-group">
+                                                                <select id="produk" class="form-control form-control form-select2" name="produk" onchange="changeData(1)" required="">
+                                                                    <option value="">Pilih Produk</option>
+                                                                    <?php
+                                                                    if(!empty($produk)){
+                                                                        foreach ($produk as $row) {
+                                                                            ?>
+                                                                            <option value="<?php echo $row['id'];?>"><?php echo $row['nama_produk'];?></option>
+                                                                            <?php
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Stok</label>
+                                                                <input type="text" id="jumlah_stok" name="stok" class="form-control numberformat" required="" autocomplete="off" required="" onchange="changeData(1)"/>
+                                                            </div> 
+                                                            <div class="form-group">
+                                                                <select id="satuan" name="satuan" class="form-control form-select2" required="">
+                                                                    <option value="">Pilih Satuan</option>
+                                                                    <?php
+                                                                    if(!empty($satuan)){
+                                                                        foreach ($satuan as $sat) {
+                                                                            ?>
+                                                                            <option value="<?php echo $sat['id'];?>"><?php echo $sat['nama_satuan'];?></option>
+                                                                            <?php
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                                    
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Harga Satuan</label>
+                                                                <input type="text" id="harga_satuan" name="harga_satuan" class="form-control numberformat" required="" autocomplete="off" required="" onchange="changeData(1)"/>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Jumlah</label>
+                                                                <input type="text" id="jumlah" name="jumlah" class="form-control numberformat" required="" autocomplete="off" required="" readonly=""/>
+                                                            </div> 
+                                                            <div class="form-group">
+                                                                <button type="submit" class="btn btn-success" id="btn-form"><i class="fa fa-send"></i> Kirim</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
 									</div>
-										
-    
+
                                 </div>
                             </div>
                         </div>
@@ -168,6 +245,9 @@
                     "data": "keterangan"
                 },
                 {
+                    "data": "edit"
+                },
+                {
                     "data": "hapus"
                 }
             ],
@@ -182,7 +262,7 @@
                 }
             ],
             "columnDefs": [{
-                    "targets": [0, 1, 4, 8],
+                    "targets": [0, 1, 4, 8, 9],
                     "className": 'text-center',
                 }
             ],
@@ -217,9 +297,77 @@
             }
             });
         }
-	
+
+        function OpenForm(id = '') {
+            $("#modalForm form").trigger("reset");
+            $('#modalForm').modal('show');
+            $('#id').val('');
+            // table_detail.ajax.reload();
+            if (id !== '') {
+                $('#id').val(id);
+                getData(id);
+            }
+        }
+
+        function getData(id) {
+            $.ajax({
+                type: "POST",
+                url: "<?php echo site_url('stok/get_remaining_stok'); ?>",
+                dataType: 'json',
+                data: {
+                    id: id
+                },
+                success: function(result) {
+                    if (result.output) {
+                        $('#id').val(result.output.id);
+                        $('#tanggal').val(result.output.tanggal);
+                        $('#produk').val(result.output.produk);
+                        $('#jumlah_stok').val(result.output.stok);
+                        $('#satuan').val(result.output.satuan);
+                        $('#harga_satuan').val(result.output.harga_satuan);
+                        $('#jumlah').val(result.output.jumlah);
+                        $('#keterangan').val(result.output.keterangan);
+                    } else if (result.err) {
+                        bootbox.alert(result.err);
+                    }
+                }
+            });
+        }
+
+        function changeData(id)
+        {
+			var jumlah_stok = $('#jumlah_stok').val();
+			var harga_satuan = $('#harga_satuan').val();
+            				
+			jumlah = ( jumlah_stok * harga_satuan );
+            $('#jumlah').val(jumlah);
+        }
+
+        $('#modalForm form').submit(function(event) {
+            $('#btn-form').button('loading');
+            $.ajax({
+                type: "POST",
+                url: "<?php echo site_url('stok/update_stok'); ?>/" + Math.random(),
+                dataType: 'json',
+                data: $(this).serialize(),
+                success: function(result) {
+                    $('#btn-form').button('reset');
+                    if (result.output) {
+                        $("#modalForm form").trigger("reset");
+                        table_stok.ajax.reload();
+                        $('#modalForm').modal('hide');
+                    } else if (result.err) {
+                        bootbox.alert(result.err);
+                    }
+                }
+            });
+
+            event.preventDefault();
+            window.location.reload(true);
+
+        });
+
     </script>
 
 </body>
-
 </html>

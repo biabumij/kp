@@ -74,27 +74,6 @@
                                                 <button type="button" class="btn btn-xs btn-info" onclick="TambahKategori()"><i class="fa fa-plus"></i> Kategori Produk</button>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-4 control-label">Satuan Produk</label>
-                                            <div class="col-sm-8">
-                                                <select id="satuan" class="form-control form-select2" name="satuan">
-                                                    <option>Pilih Satuan</option>
-                                                    <?php
-                                                    if($satuan){
-                                                        foreach ($satuan as $key => $sat) {
-                                                            $selected = false;
-                                                            if(isset($edit) && $edit['satuan'] == $sat['nama_satuan']){
-                                                                $selected = 'selected';
-                                                            }
-                                                            ?>
-                                                            <option value="<?= $sat['nama_satuan'];?>" <?= $selected;?> ><?= $sat['nama_satuan'];?></option>
-                                                            <?php
-                                                        }
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                                 <br />

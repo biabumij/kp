@@ -31,28 +31,6 @@ class M_produk extends CI_Model {
         return $output;
     }
 
-    function getSatuan($id=false,$row=false)
-    {
-        $output = false;
-
-        if($id){
-            $this->db->where('id',$id);
-        }
-        $this->db->where('status','PUBLISH');
-        $this->db->order_by('nama_satuan','ASC');
-        $this->db->order_by('id','ASC');
-        $query = $this->db->get('satuan');
-        if($query->num_rows() > 0){
-            if($row){
-                $output = $query->row_array();
-            }else {
-                $output = $query->result_array();    
-            }
-            
-        }
-        return $output;
-    }
-
 
     function getProduk($id=false,$row=false)
     {

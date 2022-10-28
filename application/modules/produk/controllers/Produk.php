@@ -27,7 +27,6 @@ class Produk extends Secure_Controller {
 				$row['no'] = $key+1;
 				$row['nama_produk'] = '<a href="'.site_url('produk/detail/'.$row['id']).'" >'.$row['nama_produk'].'</a>';
 				$row['kategori_produk'] = $row['kategori_produk'];
-				$row['satuan'] = $row['satuan'];
 				
 				$data[] = $row;
 			}
@@ -49,7 +48,6 @@ class Produk extends Secure_Controller {
 				$row['no'] = $key+1;
 				$row['nama_produk'] = '<a href="'.site_url('produk/detail/'.$row['id']).'" >'.$row['nama_produk'].'</a>';
 				$row['kategori_produk'] = $row['kategori_produk'];
-				$row['satuan'] = $row['satuan'];
 				
 				$data[] = $row;
 			}
@@ -63,7 +61,6 @@ class Produk extends Secure_Controller {
 
     	$id = $this->uri->segment(3);
     	$data['kategori'] = $this->m_produk->getKategori();
-    	$data['satuan'] = $this->m_produk->getSatuan();
 
     	if(!empty($id)){
     		$data['edit'] = $this->db->get_where('produk',array('id'=>$id))->row_array();
@@ -110,11 +107,9 @@ class Produk extends Secure_Controller {
     	$id = $this->input->post('id');
     	$nama_produk = $this->input->post('nama_produk');
 		$kategori_produk = $this->input->post('kategori_produk');
-    	$satuan = $this->input->post('satuan');
     	$data = array(
     		'nama_produk' => $nama_produk,
-			'kategori_produk' => $kategori_produk,
-    		'satuan' => $satuan
+			'kategori_produk' => $kategori_produk
     	);
 
     	if(!empty($id)){
