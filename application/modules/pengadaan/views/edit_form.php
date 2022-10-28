@@ -239,7 +239,7 @@
                                                         <input type="text" id="keterangan" name="keterangan" class="form-control dtpicker" required="" autocomplete="off" />
                                                     </div>
                                                     <div class="form-group">
-                                                        <button type="submit" class="btn btn-success" id="btn-form"><i class="fa fa-send"></i> Update Biaya</button>
+                                                        <button type="submit" class="btn btn-success" id="btn-form"><i class="fa fa-send"></i> Update Pengadaan</button>
                                                     </div>
                                                 </form>
                                             </div>
