@@ -126,7 +126,7 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Stok</label>
-                                                                <input type="text" id="jumlah_stok" name="stok" class="form-control numberformat" required="" autocomplete="off" required="" onchange="changeData(1)"/>
+                                                                <input type="text" id="jumlah_stok" name="stok" class="form-control input-sm" required="" autocomplete="off" required="" onchange="changeData(1)"/>
                                                             </div> 
                                                             <div class="form-group">
                                                                 <select id="satuan" name="satuan" class="form-control form-select2" required="">
@@ -145,11 +145,15 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Harga Satuan</label>
-                                                                <input type="text" id="harga_satuan" name="harga_satuan" class="form-control numberformat" required="" autocomplete="off" required="" onchange="changeData(1)"/>
+                                                                <input type="text" id="harga_satuan" name="harga_satuan" class="form-control numberformat tex-left input-sm" required="" autocomplete="off" required="" onchange="changeData(1)"/>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Jumlah</label>
-                                                                <input type="text" id="jumlah" name="jumlah" class="form-control numberformat" required="" autocomplete="off" required="" readonly=""/>
+                                                                <input type="text" id="jumlah" name="jumlah" class="form-control numberformat tex-left input-sm" required="" autocomplete="off" required="" readonly=""/>
+                                                            </div> 
+                                                            <div class="form-group">
+                                                                <label>Keterangan</label>
+                                                                <input type="text" id="keterangan" name="keterangan" class="form-control input-sm" required="" autocomplete="off" required=""/>
                                                             </div> 
                                                             <div class="form-group">
                                                                 <button type="submit" class="btn btn-success" id="btn-form"><i class="fa fa-send"></i> Kirim</button>
