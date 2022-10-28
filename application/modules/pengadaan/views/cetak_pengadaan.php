@@ -117,11 +117,11 @@
 			</tr>
 
 			<?php
-			$pengadaan = $this->db->select('p.judul, p.tanggal_permintaan, pd.*, p.nama_produk')
-			->from('pengadaan p')
-			->join('pengadaan_detail pd','p.id = pd.pengadaan_id','left')
-			->join('produk p','pd.produk = p.id','left')
-			->where('pd.pengadaan_id',$id)
+			$pengadaan = $this->db->select('pd.judul, pd.tanggal_permintaan, pd.*, p.nama_produk')
+			->from('pengadaan pd')
+			->join('pengadaan_detail pdt','pd.id = pdt.pengadaan_id','left')
+			->join('produk p','pdt.produk = p.id','left')
+			->where('pdt.pengadaan_id',$id)
 			->order_by('p.nama_produk','asc')
 			->get()->result_array();
 
