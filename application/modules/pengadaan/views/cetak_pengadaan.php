@@ -120,8 +120,9 @@
 			$pengadaan = $this->db->select('p.judul, p.tanggal_permintaan, pd.*')
 			->from('pengadaan p ')
 			->join('pengadaan_detail pd','p.id = pd.pengadaan_id','left')
+			->join('produk p','pd.produk = p.id','left')
 			->where('pd.pengadaan_id',$id)
-			->order_by('pd.produk','asc')
+			->order_by('p.nama_produk','asc')
 			->get()->result_array();
 
            	$no = 0 ;
