@@ -72,7 +72,7 @@
                                             <label>Stok</label>
                                         </div>
                                         <div class="col-sm-3">
-                                            <input type="number" min="0" name="stok" id="stok" class="form-control input-sm" onchange="changeData(1)" required="" />
+                                            <input type="text" name="stok" id="stok" class="form-control input-sm numberformat text-left input-sm" onchange="changeData(1)" required="" />
                                         </div>             
                                     </div>
                                     <br />
@@ -102,7 +102,7 @@
                                             <label>Harga Satuan</label>
                                         </div>
                                         <div class="col-sm-3">
-                                            <input type="text" name="harga_satuan" id="harga_satuan" class="form-control numberformat tex-left input-sm" onchange="changeData(1)" required=""/>
+                                            <input type="text" name="harga_satuan" id="harga_satuan" class="form-control numberformat text-left input-sm" onchange="changeData(1)" required=""/>
                                         </div>             
                                     </div>
                                     <br />
@@ -111,7 +111,7 @@
                                             <label>Jumlah</label>
                                         </div>
                                         <div class="col-sm-3">
-                                            <input type="text" name="jumlah" id="jumlah" class="form-control numberformat tex-left input-sm" required="" readonly=""/>
+                                            <input type="text" name="jumlah" id="jumlah" class="form-control numberformat text-left input-sm" required="" readonly=""/>
                                         </div>             
                                     </div>
                                     <br />

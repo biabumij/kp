@@ -49,7 +49,7 @@ class Pengadaan extends Secure_Controller {
 				</select>
 			</td>
             <td>
-				<input type="number" min="0" name="qty_<?php echo $no; ?>" id="qty-<?php echo $no; ?>" onchange="changeData(<?php echo $no; ?>)" class="form-control input-sm text-center" />
+				<input type="text" name="qty_<?php echo $no; ?>" id="qty-<?php echo $no; ?>" onchange="changeData(<?php echo $no; ?>)" class="form-control input-sm numberformat text-center"/>
 			</td>
 			<td>
 				<select id="satuan-<?php echo $no; ?>" class="form-control form-select2" name="satuan_<?php echo $no; ?>" required="">
@@ -106,6 +106,9 @@ class Pengadaan extends Secure_Controller {
             for ($i = 1; $i <= $total_product; $i++) {
 				$produk = $this->input->post('produk_' . $i);
 				$qty = $this->input->post('qty_' . $i);
+				$qty = str_replace('.', '', $qty);
+				$qty = str_replace(',', '.', $qty);
+
 				$satuan = $this->input->post('satuan_' . $i);
 				$keterangan = $this->input->post('keterangan_' . $i);
 
