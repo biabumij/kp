@@ -146,4 +146,3 @@ $db['database3'] = array(
 	'failover' => array(),
 	'save_queries' => TRUE
 );
-
