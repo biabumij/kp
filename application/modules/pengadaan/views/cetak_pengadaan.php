@@ -179,7 +179,7 @@
 						</tr>
 						<tr>
 							<td align="center">
-								<b><u>Feby Puji Lestari</u><br />
+								<b><u>Debi Khania</u><br />
 								Keuangan & SDM</b>
 							</td>
 							<td align="center">
