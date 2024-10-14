@@ -37,7 +37,7 @@
 				<div class="logo">
 					<img alt="logo" src="<?php echo base_url().$this->m_themes->GetThemes('site_logo');?>" />
 				</div>
-				<div class="box">
+				<div class="box" style="background-color: rgba(255, 255, 255, 0.9); margin-top:10%;">
 					<div class="panel-login mb-none">
 						<div class="panel-content-login bg-scale-0">
 							<div class="alert alert-warning" role="alert">
