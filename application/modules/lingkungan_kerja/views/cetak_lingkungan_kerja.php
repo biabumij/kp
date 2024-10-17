@@ -214,7 +214,7 @@
 		?>
 		<table width="98%" border="1" cellpadding="3">	
 			<tr>
-				<td align="left" width="25%">Lokasi <br /><br /> Menara Bidakara 1 Lt.2, Jl. Jend. Gatot Subrot0 Kav 71-73, Tebet, Jakarta Selatan</td>
+				<td align="left" width="25%">Lokasi <br /><br /> The Citadel, Jl. Dewi Sartika No.3 Lt. 3, Cililitan, Kec. Kramat jati, Kota Jakarta Timur</td>
 				<td align="center" width="25%">Diketahui: <br /><br /><br /><br /><br />
 				<b><u>Deddy Sarwobiso</u><br />
 				Direktur Utama</b></td>
