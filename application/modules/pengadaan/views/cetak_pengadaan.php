@@ -147,7 +147,6 @@
 			$no++;
 			$total += $row['jumlah'];
 			endforeach; ?>
-
             
             <tr>
                 <th colspan="5" align="right">TOTAL HARGA PERMINTAAN BARANG / JASA</th>
