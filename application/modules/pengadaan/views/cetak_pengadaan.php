@@ -153,6 +153,7 @@
                 <th colspan="5" align="right">TOTAL HARGA PERMINTAAN BARANG / JASA</th>
                 <th align="right"><?= number_format($total,0,',','.'); ?></th>
 				<th align="right"></th>
+				<th align="right"></th>
             </tr>
            	
 		</table>
