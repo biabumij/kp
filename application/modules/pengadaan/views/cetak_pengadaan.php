@@ -128,7 +128,6 @@
 			->get()->result_array();
 
            	$no = 0 ;
-
             $total = 0;
 			
            	foreach ($pengadaan as $row) : ?>  
